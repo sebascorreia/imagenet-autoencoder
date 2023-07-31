@@ -33,7 +33,7 @@ def main(args):
     # Rest of your code
 
     # Load the dataset
-    dataset = load_dataset(args.dataset) # Replace with the actual path to your dataset
+    dataset = load_dataset(args.dataset , split='train') # Replace with the actual path to your dataset
 
     # Create the image transform
     trans = transforms.Compose([
