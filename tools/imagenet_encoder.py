@@ -35,7 +35,7 @@ def main(args):
     utils.init_seeds(1,cuda_deterministic= False)
     model = builder.BuildAutoEncoder(args)
     total_params = sum(p.numel() for p in model.parameters())
-    utils.load_dict(args.resume,model
+    utils.load_dict(args.resume,model)
 
     # Load the dataset
     dataset = load_dataset(args.dataset , split='train') # Replace with the actual path to your dataset
