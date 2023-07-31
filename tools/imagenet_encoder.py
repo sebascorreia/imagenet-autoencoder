@@ -9,7 +9,7 @@ sys.path.append("./")
 # Add necessary imports for the dataset
 from datasets import load_dataset
 from io import BytesIO
-import utils
+from imagenet-autoencoder import utils
 import models.builer as builder
 
 import os
