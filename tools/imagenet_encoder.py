@@ -42,9 +42,9 @@ def main(args):
         transforms.ToTensor()
     ])
 
-    for data in dataset:
+    for img_data in dataset['image']:
         # Extract the melspectrogram image bytes and convert to PIL image
-        img = data['image'].convert("RGB")
+        img = img_data.convert("RGB")
         img = trans(img).unsqueeze(0).cuda()
 
         model.eval()
