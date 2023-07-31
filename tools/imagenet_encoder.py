@@ -65,11 +65,11 @@ def main(args):
 
         model.eval()
         encodings[counter] = encode(model, img)
-        print(code.shape)
+        
         counter= counter +1
         # To do: Save or process the encoded code
     pickle.dump(encodings, open("encodings.pkl", "wb"))
-    
+
 if __name__ == '__main__':
     args = get_args()
     main(args)
