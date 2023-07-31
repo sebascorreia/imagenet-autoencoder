@@ -59,7 +59,6 @@ def main(args):
     for data in dataset:
         
         # Extract the melspectrogram image bytes and convert to PIL image
-        print(type(data['image']))
         img = data['image'].convert("RGB")
         img = trans(img).unsqueeze(0).cuda()
 
