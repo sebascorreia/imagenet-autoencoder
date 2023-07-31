@@ -10,7 +10,7 @@ sys.path.append("./")
 from datasets import load_dataset
 from io import BytesIO
 from imagenetautoencoder import utils
-import models.builer as builder
+from imagenetautoencoder import models.builer as builder
 
 import os
 
