@@ -4,6 +4,7 @@ from torchvision.transforms import transforms
 from PIL import Image
 import os
 import numpy as np
+import pickle
 import sys
 sys.path.append("./")
 # Add necessary imports for the dataset
@@ -12,7 +13,6 @@ from io import BytesIO
 from imagenetautoencoder import utils
 from imagenetautoencoder.models import builer as builder
 
-import os
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
@@ -38,8 +38,11 @@ def encode(model, img):
 def main(args):
     print('=> torch version : {}'.format(torch.__version__))
     utils.init_seeds(1,cuda_deterministic= False)
+    print('=> modeling the network ...')
     model = builder.BuildAutoEncoder(args)
+    
     total_params = sum(p.numel() for p in model.parameters())
+    print('=> num of params: {} ({}M)'.format(total_params, int(total_params * 4 / (1024*1024))))
     utils.load_dict(args.resume,model)
 
     # Load the dataset
@@ -51,19 +54,22 @@ def main(args):
         transforms.CenterCrop(224),
         transforms.ToTensor()
     ])
-
+    encodings = {}
+    counter =0
     for data in dataset:
+        
         # Extract the melspectrogram image bytes and convert to PIL image
         print(type(data['image']))
         img = data['image'].convert("RGB")
         img = trans(img).unsqueeze(0).cuda()
 
         model.eval()
-        code = encode(model, img)
+        encodings[counter] = encode(model, img)
         print(code.shape)
-
+        counter= counter +1
         # To do: Save or process the encoded code
-
+    pickle.dump(encodings, open("encodings.pkl", "wb"))
+    
 if __name__ == '__main__':
     args = get_args()
     main(args)
