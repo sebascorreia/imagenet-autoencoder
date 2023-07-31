@@ -19,6 +19,9 @@ def get_args():
     parser.add_argument('--arch', default='vgg16', type=str, help='backbone architecture')
     parser.add_argument('--resume', type=str)
     args = parser.parse_args()
+    args.parallel = 0
+    args.batch_size = 1
+    args.workers = 0
 
     return args
 
@@ -29,8 +32,10 @@ def encode(model, img):
 
 def main(args):
     print('=> torch version : {}'.format(torch.__version__))
-
-    # Rest of your code
+    utils.init_seeds(1,cuda_deterministic= False)
+    model = builder.BuildAutoEncoder(args)
+    total_params = sum(p.numel() for p in model.parameters())
+    utils.load_dict(args.resume,model
 
     # Load the dataset
     dataset = load_dataset(args.dataset , split='train') # Replace with the actual path to your dataset
