@@ -65,7 +65,7 @@ def main(args):
             encodings[data['audio_file']] = {}
             
         model.eval()
-        encodings[data['audio_file'][data['slice'] = encode(model, img)
+        encodings[data['audio_file']][data['slice']] = encode(model, img)
         # To do: Save or process the encoded code
     pickle.dump(encodings, open("encodings.pkl", "wb"))
 
