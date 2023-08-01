@@ -61,11 +61,11 @@ def main(args):
         # Extract the melspectrogram image bytes and convert to PIL image
         img = data['image'].convert("RGB")
         img = trans(img).unsqueeze(0).cuda()
-
+        if encodings.get(data['audio_file']) is None:
+            encodings[data['audio_file']] = {}
+            
         model.eval()
-        encodings[counter] = encode(model, img)
-        
-        counter= counter +1
+        encodings[data['audio_file'][data['slice'] = encode(model, img)
         # To do: Save or process the encoded code
     pickle.dump(encodings, open("encodings.pkl", "wb"))
 
