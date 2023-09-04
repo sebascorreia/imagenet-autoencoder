@@ -62,7 +62,7 @@ def main(args):
       plt.imshow(output_img)
       plt.title("Reconstructed")
 
-  plt.savefig('figs/single_reconstruction.jpg')
+    plt.savefig('figs/single_reconstruction.jpg')
 
 if __name__ == '__main__':
     args = get_args()
