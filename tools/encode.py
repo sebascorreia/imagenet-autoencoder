@@ -68,7 +68,7 @@ def main(args):
     model.eval()
 
     code = encode(model, img)
-
+    print(code)
     print(code.shape)
 
     # To do : any other postprocessing
